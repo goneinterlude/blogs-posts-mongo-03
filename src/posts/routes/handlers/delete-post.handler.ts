@@ -4,18 +4,21 @@ import { createErrorMessages } from '../../../core/utils/error.utils';
 import { postsRepository } from "../../repositories/posts.repository";
 
 
-export function deletePostHandler(req: Request<{id: string}>, res: Response) {
+export async function deletePostHandler(req: Request<{id: string}>, res: Response) {
     const id = req.params.id;
-    const blog = postsRepository.findById(id);
-
-    if (!blog) {
-        res
-            .status(HttpStatus.NotFound)
-            .send(
-                createErrorMessages([{ field: 'id', message: 'Post not found' }]),
-            );
-        return;
+    const post = await postsRepository.findById(id);
+    try {
+        if (!post) {
+            res
+                .status(HttpStatus.NotFound)
+                .send(
+                    createErrorMessages([{field: 'id', message: 'Post not found'}]),
+                );
+            return;
+        }
+        await postsRepository.delete(id);
+        res.sendStatus(HttpStatus.NoContent);
+    } catch (err) {
+        res.sendStatus(HttpStatus.InternalServerError);
     }
-    postsRepository.delete(id);
-    res.sendStatus(HttpStatus.NoContent);
 }

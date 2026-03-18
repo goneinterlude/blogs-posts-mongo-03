@@ -1,5 +1,4 @@
-export type Post = {
-    id: string,
+export type PostDbModel = {
     title: string,
     shortDescription: string,
     content: string,

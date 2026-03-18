@@ -13,13 +13,10 @@ import {postInputDtoValidation} from "../validation/post.input-validation.middle
 
 export const postsRouter = Router({});
 
-postsRouter.get('', getPostsListHandler);
-
-postsRouter.get('/:id', idValidation, inputValidationResultMiddleware, getPostHandler);
-
-postsRouter.post('', superAdminGuardMiddleware, postInputDtoValidation, inputValidationResultMiddleware ,createPostHandler, );
-
-postsRouter.put('/:id', idValidation, postInputDtoValidation,superAdminGuardMiddleware, inputValidationResultMiddleware, updatePostHandler);
-
-postsRouter.delete('/:id', idValidation, superAdminGuardMiddleware, inputValidationResultMiddleware, deletePostHandler);
+postsRouter
+    .get('', getPostsListHandler)
+    .get('/:id', idValidation, inputValidationResultMiddleware, getPostHandler)
+    .post('', superAdminGuardMiddleware, postInputDtoValidation, inputValidationResultMiddleware ,createPostHandler, )
+    .put('/:id', idValidation, postInputDtoValidation,superAdminGuardMiddleware, inputValidationResultMiddleware, updatePostHandler)
+    .delete('/:id', idValidation, superAdminGuardMiddleware, inputValidationResultMiddleware, deletePostHandler)
 

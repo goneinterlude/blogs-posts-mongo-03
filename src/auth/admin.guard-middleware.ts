@@ -20,14 +20,14 @@ export const superAdminGuardMiddleware = (
         return;
     }
 
-    const [authType, token] = auth.split(' '); //admin:qwerty
+    const [authType, token] = auth.split(' '); //YWRtaW46cXdlcnR5Cg==
 
     if (authType !== 'Basic') {
         res.sendStatus(HttpStatus.Unauthorized);
         return;
     }
 
-    const credentials = Buffer.from(token, 'base64').toString('utf-8');
+    const credentials = Buffer.from(token, 'base64').toString('utf-8'); // admin:qwerty
 
     const [username, password] = credentials.split(':');
 
