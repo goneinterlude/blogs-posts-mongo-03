@@ -12,9 +12,7 @@ export async function getBlogHandler(
     const id = req.params.id;
     const blog = await blogsRepository.findById(id);
     if (!blog) {
-      res.sendStatus(HttpStatus.NotFound);
-
-      return;
+      return res.sendStatus(HttpStatus.NotFound);
     }
 
     const blogViewModel = mapToBlogViewModel(blog);

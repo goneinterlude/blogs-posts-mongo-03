@@ -12,9 +12,7 @@ export async function deleteBlogHandler(
     const blog = await blogsRepository.findById(id);
 
     if (!blog) {
-      res.sendStatus(HttpStatus.NotFound);
-
-      return;
+      return res.sendStatus(HttpStatus.NotFound);
     }
 
     await blogsRepository.delete(id);

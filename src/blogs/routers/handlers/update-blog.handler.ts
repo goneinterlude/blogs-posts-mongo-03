@@ -14,9 +14,7 @@ export async function updateBlogHandler(
     const blog = blogsRepository.findById(id);
 
     if (!blog) {
-      res.sendStatus(HttpStatus.NotFound);
-
-      return;
+      return res.sendStatus(HttpStatus.NotFound);
     }
     await blogsRepository.update(id, req.body);
     res.sendStatus(HttpStatus.NoContent);
