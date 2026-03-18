@@ -15,7 +15,10 @@ export async function deleteBlogHandler(
       return res.sendStatus(HttpStatus.NotFound);
     }
 
-    await blogsRepository.delete(id);
+    const isDeleted = await blogsRepository.delete(id);
+    if (!isDeleted) {
+      return res.sendStatus(HttpStatus.NotFound);
+    }
     return res.sendStatus(HttpStatus.NoContent);
   } catch (e) {
     return res.sendStatus(HttpStatus.InternalServerError);

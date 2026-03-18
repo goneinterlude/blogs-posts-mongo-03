@@ -16,7 +16,11 @@ export async function updateBlogHandler(
     if (!blog) {
       return res.sendStatus(HttpStatus.NotFound);
     }
-    await blogsRepository.update(id, req.body);
+   const isUpdated = await blogsRepository.update(id, req.body);
+    if (!isUpdated) {
+      return res.sendStatus(HttpStatus.NotFound);
+    }
+
     res.sendStatus(HttpStatus.NoContent);
   } catch (e: unknown) {
     return res.sendStatus(HttpStatus.InternalServerError);

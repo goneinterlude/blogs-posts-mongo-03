@@ -27,13 +27,10 @@ export const blogsRepository = {
     );
     return updateResult.matchedCount === 1;
   },
-  async delete(id: string): Promise<void> {
+  async delete(id: string): Promise<boolean> {
     const deleteResult = await blogCollection.deleteOne({
       _id: new ObjectId(id),
     });
-    if (deleteResult.deletedCount < 1) {
-      throw new Error("Blog not exist");
-    }
-    return;
+    return deleteResult.deletedCount === 1;
   },
 };
