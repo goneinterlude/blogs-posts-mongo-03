@@ -1,11 +1,10 @@
 import { Router, Request, Response } from 'express';
-import {db} from "../db/in-memory.db";
-import {HttpStatus} from "../core/types/http-statuses";
+import { HttpStatus } from '../core/types/http-statuses';
+import { testingRepository } from "./testing-repository/testing.repository";
 
 export const testingRouter = Router({});
 
-testingRouter.delete('/all-data', (req: Request, res: Response) => {
-    db.blogs.length = 0;
-    db.posts.length = 0;
+testingRouter.delete('/all-data', async (req: Request, res: Response) => {
+    await testingRepository.deleteAllData();
     res.sendStatus(HttpStatus.NoContent);
 });
