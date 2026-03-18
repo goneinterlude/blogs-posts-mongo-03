@@ -4,8 +4,8 @@ import { HttpStatus } from "../../../core/types/http-statuses";
 
 export async function getPostsListHandler(req: Request, res: Response) {
   try {
-    const blogs = await postsRepository.findAll();
-    res.send(blogs);
+    const posts = await postsRepository.findAll();
+    res.send(posts);
   } catch (error) {
     res.sendStatus(HttpStatus.InternalServerError);
   }
