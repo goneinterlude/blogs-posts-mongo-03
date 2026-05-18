@@ -8,13 +8,12 @@ import { PostDbModel } from "../posts/types/post-db-model";
 
 const BLOG_COLLECTION_NAME = "blogs";
 const POST_COLLECTION_NAME = "posts";
-const mongoUri = process.env.MONGO_URI || "";
 export let client: MongoClient;
 export let blogCollection: Collection<Blog>;
 export let postCollection: Collection<PostDbModel>;
 
 export async function runDB(url: string): Promise<void> {
-  client = new MongoClient(mongoUri);
+  client = new MongoClient(url);
   const db: Db = client.db(SETTINGS.DB_NAME);
 
   blogCollection = db.collection<Blog>(BLOG_COLLECTION_NAME);
